@@ -1,0 +1,85 @@
+/* The ExperiVerse ecosystem bar: 48px across the top of every page of every site, above the site's own header.
+   One source (ecosystem/ecosystem-bar.css), copied into each site's assets by ecosystem/make_bar.py. It needs no other
+   stylesheet and no script: the menus are <details>, the mark's card opens on hover and focus. System font, no web fonts.
+   Henry C. Weismann IV, weismannweb.com. */
+
+.eco-bar {
+  --eco-bg: #0E1215; --eco-line: #262C31; --eco-pop: #151A1E; --eco-hover: #1B2126;
+  --eco-fg: #CDD1D6; --eco-hi: #FFFFFF; --eco-muted: #959AA3; --eco-acc: var(--accent, #72E4D3);
+  position: relative; z-index: 60; box-sizing: content-box; height: 48px;
+  background: var(--eco-bg); border-bottom: 1px solid var(--eco-line); color: var(--eco-fg);
+  font: 400 14px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+.eco-bar *, .eco-bar *::before, .eco-bar *::after { box-sizing: border-box; }
+.eco-bar a { text-decoration: none; }
+.eco-bar svg { max-width: none; }
+.eco-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.eco-bar :focus-visible { outline: 2px solid #B2C7B5; outline-offset: 2px; border-radius: 999px; }
+.eco-in { position: relative; display: flex; align-items: center; gap: 4px; height: 100%; max-width: 75rem;
+  margin: 0 auto; padding: 0 var(--gutter, 16px); }
+
+/* Left: the symbol and its card */
+.eco-brand { position: relative; display: flex; align-items: center; margin-right: auto; min-width: 0; }
+.eco-mark { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 10px 0 4px; border-radius: 999px;
+  color: var(--eco-hi); font-weight: 600; white-space: nowrap; }
+.eco-mark:hover { color: var(--eco-hi); }
+.eco-sym { display: block; flex: none; width: 24px; height: 24px; }
+.eco-card { position: absolute; left: 0; top: calc(100% + 6px); z-index: 2; width: max-content;
+  max-width: min(320px, calc(100vw - 32px)); padding: 14px 16px; background: var(--eco-pop); border: 1px solid var(--eco-line);
+  border-radius: 12px; box-shadow: 0 16px 32px rgba(0, 0, 0, .45);
+  visibility: hidden; opacity: 0; transform: translateY(-4px);
+  transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s; }
+.eco-card::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.eco-brand:hover .eco-card, .eco-brand:focus-within .eco-card { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+.eco-brand.eco-off .eco-card { visibility: hidden; opacity: 0; }
+.eco-card p { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: var(--eco-fg); }
+.eco-card strong { color: var(--eco-hi); }
+.eco-card a { color: var(--eco-acc); font-weight: 600; }
+.eco-card a:hover { text-decoration: underline; color: var(--eco-acc); }
+
+/* Right: the domain switcher, GitHub, the author */
+.eco-nav { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.eco-dd { position: relative; min-width: 0; }
+.eco-dd > summary { list-style: none; display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px;
+  border-radius: 999px; color: var(--eco-fg); cursor: pointer; white-space: nowrap; user-select: none; }
+.eco-dd > summary::-webkit-details-marker { display: none; }
+.eco-dd > summary:hover, .eco-dd[open] > summary { color: var(--eco-hi); background: var(--eco-hover); }
+.eco-sites > summary { border: 1px solid var(--eco-line); padding: 0 10px 0 12px; }
+.eco-sites > summary .eco-dot { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--eco-acc); }
+.eco-cur { overflow: hidden; text-overflow: ellipsis; min-width: 0; font-weight: 600; color: var(--eco-hi); }
+.eco-chev { display: block; flex: none; width: 12px; height: 12px; transition: transform .15s ease; }
+.eco-dd[open] .eco-chev { transform: rotate(180deg); }
+.eco-ico { display: block; flex: none; width: 16px; height: 16px; }
+.eco-menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 3; width: 320px; max-width: calc(100vw - 32px);
+  margin: 0; padding: 6px; list-style: none; background: var(--eco-pop); border: 1px solid var(--eco-line);
+  border-radius: 12px; box-shadow: 0 16px 32px rgba(0, 0, 0, .45); }
+.eco-menu li { margin: 0; padding: 0; }
+.eco-menu a { display: block; padding: 8px 10px; border-radius: 8px; color: var(--eco-fg); }
+.eco-menu a:hover { background: var(--eco-hover); color: var(--eco-hi); }
+.eco-dom { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--eco-hi); }
+.eco-desc { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.4; color: var(--eco-muted); }
+.eco-tag { font-size: 11px; font-weight: 600; line-height: 1.5; padding: 0 7px; border-radius: 999px;
+  border: 1px solid currentColor; color: var(--eco-acc); white-space: nowrap; }
+.eco-tag.eco-soon { color: #F2B45A; }
+.eco-menu-head { padding: 6px 10px 4px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--eco-muted); }
+.eco-by { display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; border-radius: 999px;
+  color: var(--eco-fg); white-space: nowrap; }
+.eco-by:hover { color: var(--eco-hi); background: var(--eco-hover); }
+
+/* Phones: labels shrink to icons, plus the current domain */
+@media (max-width: 780px) {
+  .eco-name, .eco-lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+    clip-path: inset(50%); white-space: nowrap; }
+  .eco-mark { padding: 0 8px; }
+  .eco-dd { position: static; }
+  .eco-menu { right: 16px; top: calc(100% + 6px); }
+  .eco-sites > summary { max-width: 52vw; }
+  .eco-gh > summary, .eco-by { justify-content: center; width: 36px; height: 36px; padding: 0; }
+  .eco-gh > summary .eco-chev { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eco-card, .eco-chev { transition: none; }
+  .eco-card { transform: none; }
+}
+@media print { .eco-bar { display: none; } }

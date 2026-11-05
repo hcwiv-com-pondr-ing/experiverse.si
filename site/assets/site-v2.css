@@ -1,0 +1,86 @@
+/* Version 2 pieces for the static ExperiVerse sites: images from aquariusintuitive.com, the logo page, the app cards
+   and the release order. Loaded after site.css on every page; one source (ecosystem/site-v2.css), copied by
+   ecosystem/make_bar.py. Henry C. Weismann IV, weismannweb.com. */
+
+/* Images (absolute URLs on aquariusintuitive.com, lazy-loaded) */
+.card .card-img { display: block; width: calc(100% + 2.8rem); max-width: none; height: auto; aspect-ratio: 16 / 9;
+  margin: -1.4rem -1.4rem .6rem; object-fit: cover; background: var(--surface-2);
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0; }
+.figure { margin: 0; }
+.figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius);
+  background: var(--surface-2); border: 1px solid var(--line); }
+.figure figcaption { margin-top: .5rem; font-size: .85rem; color: var(--muted); }
+.hero-figure { margin: 0; }
+.hero-figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius);
+  border: 1px solid var(--line); background: var(--surface-2); }
+
+/* Plans and apps */
+.chip.demo { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.apps { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 560px) { .apps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .apps { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.apps .card { gap: .45rem; }
+.apps .card h3 { font-size: 1.1rem; }
+.apps .card .chips { margin-top: .1rem; }
+.apps .card p { font-size: .92rem; }
+.apps .card .more { font-size: .88rem; }
+ol.release { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: .75rem; counter-reset: r;
+  grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { ol.release { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+ol.release > li { counter-increment: r; margin: 0; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); }
+ol.release > li::before { content: counter(r); display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; margin-bottom: .4rem;
+  border-radius: 50%; font-weight: 700; font-size: .85rem; background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+ol.release > li b { display: block; color: var(--text); }
+ol.release > li span { color: var(--soft); font-size: .92rem; }
+ol.release > li.now { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.band.surface ol.release > li { background: var(--surface-2); }
+.plan-note { display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+
+/* The logo page */
+.mk-grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .mk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .mk-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.mk-tile { margin: 0; border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.mk-tile .mk-art { display: grid; place-items: center; min-height: 11rem; padding: 1.5rem; }
+.mk-tile .mk-art img { display: block; width: auto; height: auto; max-width: 100%; }
+.mk-tile .mk-art img.sym { width: 6rem; height: 6rem; }
+.mk-tile .mk-art img.lock { width: 100%; max-width: 18rem; }
+.mk-tile .mk-art img.word { width: 100%; max-width: 15rem; }
+.mk-tile figcaption { padding: .8rem 1rem 1rem; background: var(--surface); border-top: 1px solid var(--line); font-size: .9rem; color: var(--soft); flex: 1; }
+.mk-tile figcaption b { display: block; color: var(--text); }
+.mk-tile figcaption a { font-size: .85rem; }
+.mk-dark .mk-art { background: #0B1015; }
+.mk-light .mk-art { background: #EDF1F1; }
+.mk-black .mk-art { background: #000000; }
+.mk-parts { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 1000px) { .mk-parts { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+.ev-spheres { margin: 0; }
+.ev-spheres svg { display: block; width: 100%; height: auto; max-width: 560px; }
+.ev-spheres .evs-lead { stroke: #8C99A6; }
+.ev-spheres .evs-label { fill: var(--muted); font-size: 16px; font-family: var(--font); }
+.ev-spheres .evs-label .evs-name { fill: var(--text); font-weight: 700; font-size: 20px; }
+.ev-spheres-list { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: .6rem; }
+.ev-spheres-list li { margin: 0; padding-left: 1rem; border-left: 2px solid var(--line-2); color: var(--soft); }
+.ev-spheres-list strong { display: block; font-size: 1.05rem; }
+.swatch { display: inline-block; width: 1.1rem; height: 1.1rem; border-radius: 50%; vertical-align: -.2rem; margin-right: .45rem;
+  border: 1px solid rgba(255,255,255,.25); }
+.sw-tsiyongrid { background: #CF4060; } .sw-purehuman { background: #72E4D3; } .sw-humanproof { background: #9AD7A8; }
+.sw-experiverse { background: #B3A6FF; } .sw-consensus { background: #F2B45A; }
+.site-row { display: flex; align-items: center; gap: .6rem; }
+.site-row + span { display: block; margin-top: .15rem; }
+#variants h3.mt { margin-top: 2.25rem; }
+#variants .mk-grid { margin-top: 1rem; }
+.release-title { margin-top: 2rem; }
+.site-row img { width: 1.6rem; height: 1.6rem; flex: none; }
+.mk-clear { display: grid; place-items: center; background: #0B1015; border-radius: var(--radius); border: 1px solid var(--line); padding: 1.5rem; }
+.mk-clear span { display: block; padding: 2.24rem; outline: 1px dashed rgba(114,228,211,.55); outline-offset: 0; }
+.mk-clear img, .figure .mk-clear img { display: block; width: 7rem; height: 7rem; aspect-ratio: 1; object-fit: contain;
+  background: none; border: 0; border-radius: 0; }
+.dodont { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .dodont { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.dodont .card ul { padding-left: 1.1rem; }
+.dodont .card.do { border-color: rgba(154,215,168,.4); }
+.dodont .card.dont { border-color: rgba(207,64,96,.45); }
+.files { columns: 2 14rem; column-gap: 2rem; padding-left: 1.1rem; }
+.files li { break-inside: avoid; }
