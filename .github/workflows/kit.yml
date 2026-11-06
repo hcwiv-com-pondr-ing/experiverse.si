@@ -1,0 +1,21 @@
+# The repository kit (IF 362 to IF 364, IF 366): the same checks in every repository of ours, on every push, every
+# pull request and every night: drift from the record, scope, secrets, append-only chains. Read only, no secrets, no
+# outside actions beyond checkout (so it runs on Forgejo too). Published by `experiverse.si.cli sites publish` as
+# .github/workflows/kit.yml; never edited here by hand (that would itself show as drift).
+name: kit
+on:
+  push: {}
+  pull_request: {}
+  schedule:
+    - cron: "17 7 * * *"             # nightly drift check, 07:17 UTC
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  kit:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1 (2026-07-17)
+        with: {persist-credentials: false, fetch-depth: 2}
+      - name: drift, scope, secrets and append-only chains
+        run: python3 .kit/kit.py check
